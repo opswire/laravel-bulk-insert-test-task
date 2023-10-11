@@ -47,6 +47,11 @@
                 font-weight: bold;
             }
 
+            .container {
+                display: flex;
+                justify-content: center;
+            }
+
             #totalUsers, #addedUsers, #updatedUsers {
                 font-weight: 600;
             }
@@ -54,7 +59,7 @@
     </head>
     <body>
     <h1>User Import</h1>
-    <div style="display: flex; justify-content: center;">
+    <div class="container">
         <button id="importButton" class="import-button">Импортировать пользователей</button>
         <p>Всего: <span id="totalUsers">0</span>,</p>
         <p>Добавлено: <span id="addedUsers">0</span>,</p>
