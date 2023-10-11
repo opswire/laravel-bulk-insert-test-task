@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Client\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class ImportService
@@ -19,11 +21,18 @@ class ImportService
 
         $usersData = $this->collectDataFromResponse($response);
 
-        $upsertResult = User::upsert(
-            $usersData,
-            ['first_name', 'last_name'],
-            ['email', 'age']
-        );
+        DB::beginTransaction();
+        try {
+            $upsertResult = User::upsert(
+                $usersData,
+                ['first_name', 'last_name'],
+                ['email', 'age']
+            );
+        } catch (QueryException $e) {
+            DB::rollBack();
+            return ['error' => $e->getMessage()];
+        }
+        DB::commit();
 
         $totalUsers = User::count();
 

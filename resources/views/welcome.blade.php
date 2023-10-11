@@ -55,6 +55,10 @@
             #totalUsers, #addedUsers, #updatedUsers {
                 font-weight: 600;
             }
+
+            #error {
+                color: red;
+            }
         </style>
     </head>
     <body>
@@ -65,6 +69,9 @@
         <p>Добавлено: <span id="addedUsers">0</span>,</p>
         <p>Обновлено: <span id="updatedUsers">0</span>,</p>
     </div>
+    <div>
+        <span id="error"></span>
+    </div>
 
     <script>
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -72,6 +79,7 @@
         const totalUsers = document.getElementById('totalUsers');
         const addedUsers = document.getElementById('addedUsers');
         const updatedUsers = document.getElementById('updatedUsers');
+        const error = document.getElementById('error');
 
         importButton.addEventListener('click', async () => {
             const response = await fetch('/import', {
@@ -87,6 +95,7 @@
             totalUsers.textContent = data.total;
             addedUsers.textContent = data.added;
             updatedUsers.textContent = data.updated;
+            error.textContent = data.error;
         });
     </script>
     </body>
