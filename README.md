@@ -8,6 +8,30 @@
 Stack: Laravel, mysql
 ``
 
+## Инструкция По Запуску:
+
+
++ ``` Clone the repo```
+
+
++ ``` cd laravel-bulk-insert-test-task```
+
+
++ ```cp .env.example .env```
+
+
++ ```docker-compose up --build -d```
+
+
++ ```docker-compose run --rm -it app composer install```
+
+
++ ```docker-compose run --rm -it app php artisan migrate```
+
+#### Сервер доступен на 8000 порту
+
+#### Для проверки производительности использовать эндпоинт http://localhost:8000/telescope/requests
+
 
 
 
